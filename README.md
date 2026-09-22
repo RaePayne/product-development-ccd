@@ -40,4 +40,4 @@ None yet.
 
 - No `product-design-overview.md` or `design-system.md` yet — nothing has reached the UI/prototype stage.
 - `terminology-dictionary/ccd-terms.md` is entirely placeholders — fill in definitions as terms come up in real work.
-- `design-system/brand.md` is duplicated here and in `product-development-corum` (the LOTS repo) rather than centralised. Same open question as noted there: worth deciding whether it should live somewhere shared and be referenced by all three product repos instead of copy-pasted. If it's ever edited, remember to update both copies (and the future RPM copy) until that's resolved.
+- `design-system/brand.md` is duplicated across all three product repos (`product-development-corum`, `product-development-ccd`, `product-development-rpm`) rather than centralised. Same open question as noted in the others: worth deciding whether it should live somewhere shared and be referenced instead of copy-pasted. If it's ever edited, remember to update every copy until that's resolved.
