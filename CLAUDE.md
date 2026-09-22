@@ -77,7 +77,7 @@ Two templates also exist for larger strategic work: `writing-standards/business-
 
 ## Boundary with the CCD Codebase — do not mix these up
 
-The **CCD codebase** (a separate repo — `CorumClaer CCD Repo` locally, cloned from Azure DevOps as `Corum Dispense/Dispense`, a .NET solution — `Dispense.sln`) is where actual dev-cycle work happens: ticket-driven PRDs for code changes, implementation-readiness reports, sprint-change-proposals, story files, investigations. If a BMAD workflow is run from that repo's context, its own `_bmad-output/` is the authoritative home for that output — not here.
+The **CCD codebase** (a separate repo — `CorumClear CCD Repo` locally, cloned from Azure DevOps as `Corum Dispense/Dispense`, a .NET solution — `Dispense.sln`) is where actual dev-cycle work happens: ticket-driven PRDs for code changes, implementation-readiness reports, sprint-change-proposals, story files, investigations. If a BMAD workflow is run from that repo's context, its own `_bmad-output/` is the authoritative home for that output — not here.
 
 This repo (`product-development-ccd`) is for product-management-level thinking: should we build something, what should it do for the business, how do we position and launch it. If a document is scoped to a specific ticket, a specific source file, or a release branch, it belongs in the CCD codebase repo, not here.
 

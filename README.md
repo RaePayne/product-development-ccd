@@ -2,7 +2,7 @@
 
 This repository is the source of truth for **CCD** (Corum Clear Dispense) product documentation: PRDs, FRDs, design specs, go-to-market material, and CCD-scoped strategy. Corum's other products, LOTS and RPM, each have their own separate product-development repo — this one does not cover them.
 
-It does **not** contain code. CCD's codebase lives in a separate repo (`CorumClaer CCD Repo` locally, cloned from Azure DevOps — `Corum Dispense/Dispense`) — see [Boundary with the CCD Codebase](CLAUDE.md#boundary-with-the-ccd-codebase-do-not-mix-these-up) in `CLAUDE.md` for where the line sits.
+It does **not** contain code. CCD's codebase lives in a separate repo (`CorumClear CCD Repo` locally, cloned from Azure DevOps — `Corum Dispense/Dispense`) — see [Boundary with the CCD Codebase](CLAUDE.md#boundary-with-the-ccd-codebase-do-not-mix-these-up) in `CLAUDE.md` for where the line sits.
 
 ## Using This Repo with Claude Code
 
