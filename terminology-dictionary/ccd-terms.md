@@ -30,4 +30,5 @@ Terms specific to Corum Clear Dispense (CCD) and the pharmacy domain. Read this 
 
 | Term | Definition |
 |------|------------|
+| **eRx API** | The external eRx service/API referenced by CPR-61. The provider, API product, and exact meaning of “eRx” are [To be defined] from the ticket or service documentation. |
 | **[Term]** | [To be defined] |
