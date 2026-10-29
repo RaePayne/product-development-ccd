@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wireframe — Ward and Ward Code</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#f2f2f2;color:#222;margin:0;padding:16px}
+  h1{font-size:18px;margin:0 0 4px} .note{color:#666;font-size:12px;margin-bottom:12px}
+  .tabs button{border:1px solid #999;background:#fff;padding:6px 12px;cursor:pointer;margin-right:4px}
+  .tabs button.on{background:#ddd;font-weight:bold}
+  .screen{display:none;background:#fff;border:2px solid #888;padding:16px;margin-top:12px;max-width:760px}
+  .screen.on{display:block}
+  h2{font-size:15px;margin:0 0 12px;border-bottom:1px solid #ccc;padding-bottom:6px}
+  table{border-collapse:collapse;width:100%;font-size:13px}
+  th,td{border:1px solid #bbb;padding:6px;text-align:left} th{background:#eee}
+  label{display:block;font-size:12px;margin:10px 0 3px}
+  input,select{width:100%;max-width:320px;padding:6px;border:1px solid #888;box-sizing:border-box}
+  button.a{border:1px solid #666;background:#eee;padding:5px 10px;cursor:pointer;font-size:12px}
+  button.p{background:#555;color:#fff}
+  .msg{font-size:12px;margin-top:8px;padding:6px;display:none}
+  .err{background:#fde;border:1px solid #c66;color:#900}
+  .empty{color:#777;font-style:italic;padding:12px;text-align:center}
+  .tag{font-size:11px;color:#666;margin-top:12px}
+</style>
+</head>
+<body>
+<h1>Ward and Ward Code — low-fidelity wireframe</h1>
+<div class="note">Layout only; not final design. Covers UC-WRD-001 (manage Wards) and UC-WRD-002 (patient Ward). Sample data is fictional.</div>
+
+<div class="tabs">
+  <button class="on" data-s="s1">1. Facility — Wards</button>
+  <button data-s="s2">2. Add / edit Ward</button>
+  <button data-s="s3">3. Patient — Ward</button>
+</div>
+
+<div id="s1" class="screen on">
+  <h2>Facility details — Sample Aged Care (Wards)</h2>
+  <div style="margin-bottom:8px"><button class="a p" onclick="show('s2')">+ Add Ward</button>
+    <button class="a" onclick="toggleEmpty()">Toggle empty state</button></div>
+  <table id="wt">
+    <tr><th>Ward name</th><th>Ward code</th><th>Patients</th><th>Actions</th></tr>
+    <tr><td>North Wing</td><td>NW1</td><td>12</td><td><button class="a" onclick="show('s2')">Edit</button> <button class="a" onclick="del(12)">Delete</button></td></tr>
+    <tr><td>Memory Support</td><td>MS1</td><td>8</td><td><button class="a" onclick="show('s2')">Edit</button> <button class="a" onclick="del(8)">Delete</button></td></tr>
+    <tr><td>Respite</td><td>RSP</td><td>0</td><td><button class="a" onclick="show('s2')">Edit</button> <button class="a" onclick="del(0)">Delete</button></td></tr>
+  </table>
+  <div id="empty" class="empty" style="display:none">No Wards yet. Add a Ward to assign patients.</div>
+  <div id="delmsg" class="msg err"></div>
+  <div class="tag">Delete is blocked while patients are assigned. Deleted Wards are flagged in LOTS_MMS, not removed.</div>
+</div>
+
+<div id="s2" class="screen">
+  <h2>Add / edit Ward</h2>
+  <label>Ward name *</label><input id="wn" value="North Wing">
+  <label>Ward code * (unique within this Facility)</label><input id="wc" value="NW1">
+  <div id="dup" class="msg err"></div>
+  <p><button class="a p" onclick="saveWard()">Save</button> <button class="a" onclick="show('s1')">Cancel</button>
+  <button class="a" onclick="dupErr()">Preview duplicate-code error</button></p>
+  <div class="tag">Saving updates the Ward in LOTS_MMS (LastUpdated / RowVersion change).</div>
+</div>
+
+<div id="s3" class="screen">
+  <h2>Patient record — Jane Citizen</h2>
+  <label>Facility</label>
+  <select id="fac" onchange="facChange()"><option>Sample Aged Care</option><option>Riverside Lodge</option></select>
+  <label>Ward (optional)</label>
+  <select id="ward">
+    <option>— None —</option><option selected>North Wing (NW1)</option><option>Memory Support (MS1)</option><option>Respite (RSP)</option>
+  </select>
+  <div id="wmsg" class="msg err"></div>
+  <p><button class="a p" onclick="savePt()">Save</button>
+  <button class="a" onclick="gone()">Preview "Ward no longer available" error</button></p>
+  <div class="tag">Only active Wards of the selected Facility are listed. Changing Facility clears the Ward. Saving updates the patient's Ward in LOTS_MMS.</div>
+</div>
+
+<script>
+function show(id){document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('on',e.id===id));
+  document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('on',b.dataset.s===id));}
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>show(b.dataset.s));
+function msg(id,t){var e=document.getElementById(id);e.textContent=t;e.style.display='block';}
+function del(n){ if(n>0){msg('delmsg',n+' patients are assigned to this Ward. Move them to another Ward first.');}
+  else{msg('delmsg','Ward deleted (flagged in LOTS_MMS). [Wireframe only]');} }
+function toggleEmpty(){var t=document.getElementById('wt'),e=document.getElementById('empty');
+  var h=t.style.display==='none';t.style.display=h?'':'none';e.style.display=h?'none':'block';}
+function dupErr(){msg('dup','Ward code '+document.getElementById('wc').value+' is already used in this Facility');}
+function saveWard(){if(!wn.value||!wc.value){msg('dup','Ward name and Ward code are required.');return;}show('s1');}
+function facChange(){var w=document.getElementById('ward');w.innerHTML='<option>— None —</option>';
+  msg('wmsg','Ward cleared. Choose a Ward in the new Facility.');}
+function gone(){msg('wmsg','This Ward is no longer available. Choose another Ward.');}
+function savePt(){document.getElementById('wmsg').style.display='none';}
+</script>
+</body>
+</html>
