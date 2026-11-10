@@ -35,6 +35,7 @@ product-development-ccd/
 ## Current Projects
 
 [eRx API Integration (CPR-61)](project-erx-api-integration/).
+[CPR-98](project-cpr-98/).
 
 ## Known Gaps (as of 2026-09-23)
 

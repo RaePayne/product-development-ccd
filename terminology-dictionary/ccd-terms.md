@@ -38,3 +38,17 @@ Terms specific to Corum Clear Dispense (CCD) and the pharmacy domain. Read this 
 | **LOTS_MMS** | The interface database through which integrated systems such as BESTMED read facility, ward and patient data from the dispense system. |
 | **YourRef** | The identifier a row in the LOTS_MMS interface carries for the matching record in the dispense system (for example a ward or patient). Unique within one pharmacy, not across pharmacies. |
 | **[Term]** | [To be defined] |
+
+## Healthcare Identifiers & Conformance
+
+| Term | Definition |
+|------|------------|
+| **the Agency** | The Australian Digital Health Agency, which runs the HI Service and its conformance scheme. |
+| **HI Service** | The national Healthcare Identifiers Service operated by the Agency. CCD connects to it to validate and search IHIs, HPI-Is and HPI-Os. |
+| **IHI** | Individual Healthcare Identifier — the national identifier for a patient. |
+| **HPI-I** | Healthcare Provider Identifier – Individual — the national identifier for a prescriber or other provider. |
+| **HPI-O** | Healthcare Provider Identifier – Organisation — the national identifier for an organisation such as a pharmacy. |
+| **HI conformance profile** | The versioned set of requirements (for example 4.0) a software system must pass the Agency's testing against to connect to the HI Service. |
+| **HI Service Conformance Register** | The Agency's published list of software systems, versions and HI conformance profiles registered for connection to the HI Service. |
+| **Profile sunset** | The date after which a system registered under an HI conformance profile is no longer permitted to connect to the HI Service. |
+| **[Term]** | [To be defined] |
